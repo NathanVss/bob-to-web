@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+  	<head>
+    	<meta charset="utf-8">
+    	<title>{% block title %}Bob To Web{% endblock %}</title>
+
+    {# {% stylesheets '@YuBobToWebBundle/Resources/public/css/*' filter='cssrewrite' %} #}
+		{% stylesheets 'bundles/yubobtoweb/css/*' filter='cssrewrite' %}
+		    <link rel="stylesheet" href="{{ asset_url }}" />
+		{% endstylesheets %}    	
+
+	</head>
+	<body>
+    {% block body %}
+
+
+    {% endblock %}
+
+  	{% javascripts '@YuBobToWebBundle/Resources/public/js/jquery-2.1.1.min.js' %}
+  		<script type="text/javascript" src="{{ asset_url }}"></script>
+  	{% endjavascripts %}
+  	</body>
+
+
+</html>

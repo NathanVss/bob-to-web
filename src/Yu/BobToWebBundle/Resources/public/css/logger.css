@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Ubuntu";
+    src: url('../fonts/Ubuntu-R.ttf');
+}
+
+.log {
+
+	border-bottom : 2px #7f8c8d solid;
+	margin: 5px 0 5px 0;
+}
+.log p {
+
+	font-family: "Ubuntu";
+}
+.logs {
+
+	padding: 10px;
+}

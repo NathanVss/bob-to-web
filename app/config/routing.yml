@@ -1,0 +1,8 @@
+yu_bob_to_web:
+    resource: "@YuBobToWebBundle/Resources/config/routing.yml"
+    prefix:   /
+
+oc_platform:
+    resource: "@OCPlatformBundle/Resources/config/routing.yml"
+    prefix:   /
+
