@@ -12,10 +12,7 @@ class DefaultController extends Controller
 {
     public function indexAction() {
 
-        $encoders = array(new JsonEncoder());
-        $normalizers = array(new GetSetMethodNormalizer());
-
-        $serializer = new Serializer($normalizers, $encoders);
+        $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
 
     	$Logger = $this->container->get('yu_bob_to_web.logger');
     	$url = $this->get('router')->generate(
@@ -24,13 +21,7 @@ class DefaultController extends Controller
     		);
     	$url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$url;
 
-    	$content = file_get_contents($url);
 
-        var_dump(json_decode($content));
-        $Logs = $serializer->deserialize($content, 'Yu\BobToWebBundle\Entity\Log', 'json');
-        var_dump($Logs);
-    	//echo '<pre>'; var_dump(json_decode($content)); echo '</pre>';
-    	//$Logger->updateLogs();
-		return $this->render('YuBobToWebBundle:Logger:index.html.twig');  
+		return $this->render('YuBobToWebBundle:Logger:index.html.twig', array('ajaxUrlLastsLogs' => $url));  
     }
 }

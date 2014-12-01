@@ -1,11 +1,18 @@
 {% extends "YuBobToWebBundle::layout.html.twig" %}
 
 
+
 {% block title %}
 	Accueil - {{ parent() }}
 {% endblock %}
 
 {% block body %}
+
+<script>
+
+	var ajaxUrlLastsLogs = "{{ ajaxUrlLastsLogs }}";
+
+</script>
 
 	<div class="logs">
 		<div class="log">
