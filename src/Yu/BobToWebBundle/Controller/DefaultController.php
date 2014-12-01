@@ -21,7 +21,7 @@ class DefaultController extends Controller
     		);
     	$url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$url;
 
-
+        // OMG LOL
 		return $this->render('YuBobToWebBundle:Logger:index.html.twig', array('ajaxUrlLastsLogs' => $url));  
     }
 }
