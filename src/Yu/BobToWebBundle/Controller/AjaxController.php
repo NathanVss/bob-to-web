@@ -21,8 +21,9 @@ class AjaxController extends Controller
 
 		$encoders = array(new JsonEncoder());
 		$normalizers = array(new GetSetMethodNormalizer());
-
 		$serializer = new Serializer($normalizers, $encoders);
+        $Logger = $this->container->get('yu_bob_to_web.logger');
+        $Logger->updateLogs();
 
     	$repository = $this->getDoctrine()->getManager()->getRepository('YuBobToWebBundle:Log');
     	$Logs = $repository->findBy(array(), array('time' => 'desc'), $amount);

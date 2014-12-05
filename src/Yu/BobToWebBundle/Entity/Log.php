@@ -51,6 +51,11 @@ class Log
         $this->characterName = $characterName;
     }
 
+    public function getStandartDate() {
+
+        return date("d.m.Y G:i:s ", $this->time);
+    }
+
     /**
      * Get id
      *

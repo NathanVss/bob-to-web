@@ -101,10 +101,6 @@ div.black {
 /* MARGINS */
 
 /* TOP */
-.-nm {
-
-	margin : 0;
-}
 .-mt {
 	margin-top: 5px;
 }
@@ -133,6 +129,9 @@ div.black {
 }
 .-ma {
 	margin: auto;
+}
+.-nm {
+	margin: 0;
 }
 
 /* BORDERS */

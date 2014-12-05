@@ -5,14 +5,35 @@
     	<title>{% block title %}Bob To Web{% endblock %}</title>
 
     {# {% stylesheets '@YuBobToWebBundle/Resources/public/css/*' filter='cssrewrite' %} #}
-		{% stylesheets 'bundles/yubobtoweb/css/*' filter='cssrewrite' %}
-		    <link rel="stylesheet" href="{{ asset_url }}" />
-		{% endstylesheets %}    	
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/yubobtoweb/css/logger.css') }}" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('bundles/yubobtoweb/css/main.css') }}" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('bundles/yubobtoweb/css/YuStyle.css') }}" type="text/css" />
+        {% endblock %}	
 
 	</head>
 	<body>
     {% block body %}
 
+      <div class="cool-phrase">
+
+        <p class="-nm">What's up on M2Bob ?</p>
+
+      </div>
+
+    <div class="f2">
+
+      <ul class="left-menu">
+
+        <li>
+          <a href="{{ path('yu_bob_to_web_manage_log_files') }}">Fichiers Logs</a>
+        </li>
+
+        <li>
+          <a href="{{ path('yu_bob_to_web_homepage') }}">Logs en Direct</a>
+        </li>
+      </ul>
+    </div>
 
     {% endblock %}
 

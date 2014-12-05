@@ -3,49 +3,84 @@
 namespace Yu\BobToWebBundle\Logger;
 
 use Yu\BobToWebBundle\Entity\Log;
+use Yu\BobToWebBundle\Entity\LogsFile;
 
 class YuLogger {
 
 	private $filesToCheck;
 	private $em;
+	private $LogsFiles;
 	public function __construct($doctrine) {
 		$this->em = $doctrine->getManager();
+		$this->LogsFiles = $this->em->getRepository('YuBobToWebBundle:LogsFile')->findAll();
+		// var_dump($this->LogsFiles);
+
 		$this->filesToCheck = array('C:/Users/Nathan/Documents/M2Bob/M2Bob - Version/M2Bob - Version 3.9.8/Resources/Userdata/Logs/Jeltao.log');
+
+	}
+
+	public function mustUpdate($LogsFile) {
+
+		$curSize = filesize($LogsFile->getPath());
+
+		if($curSize != $LogsFile->getLastSize()) {
+
+			$LogsFile->setLastSize($curSize);
+			$LogsFile->setLastCheckTime(time());
+			$this->em->persist($LogsFile);
+			$this->em->flush();
+			return true;
+		}
+
+		return false;
+	}
+
+	public function getLogFromScratch($datas) {
+
+		if(preg_match("#\[([a-zA-Z0-9]+):\s+([0-9\.]+),\s([0-9:]+)\]\s-->\s([a-zA-Z0-9:,\s]+)#", $datas, $matches)) {
+			$name = $matches[1];
+			$date = $matches[2];
+			$hour = $matches[3];
+			$content = $matches[4];
+			$dateFormated = $this->reverseDate($date);
+			$timeFormated = $dateFormated.' '.$hour;
+			$Log = new Log();
+			$Log->setTime(strtotime($timeFormated));
+			$Log->setContent($content);
+			$Log->setCharacterName($name);
+			return $Log;
+		}		
+		return false;
 
 	}
 
 	// TODO : Se baser sur la taille modifée(?) du fichier
 	public function updateLogs() {
+		$repository = $this->em->getRepository('YuBobToWebBundle:Log');
+		foreach($this->LogsFiles as $LogsFile) {
+			// var_dump($LogsFile);
+			// var_dump($LogsFile);
+			if($this->mustUpdate($LogsFile)) {
+				// var_dump('must update this one');
+				$content = file_get_contents($LogsFile->getPath());
+				$logs = explode("\r\n", $content);
 
-		foreach($this->filesToCheck as $fileToCheck) {
-			$repository = $this->em->getRepository('YuBobToWebBundle:Log');
-			$content = file_get_contents($fileToCheck);
-			$logs = explode("\r\n", $content);
-			// var_dump($logs);
-			foreach($logs as $log) {
-				if(preg_match("#\[([a-zA-Z0-9]+):\s([0-9\.]+),\s([0-9:]+)\]\s-->\s([a-zA-Z0-9\s]+)#", $log, $matches)) {
-					$name = $matches[1];
-					$date = $matches[2];
-					$hour = $matches[3];
-					$content = $matches[4];
-					$dateFormated = $this->reverseDate($date);
-					$timeFormated = $dateFormated.' '.$hour;
-					$Log = new Log();
-					$Log->setTime(strtotime($timeFormated));
-					$Log->setContent($content);
-					$Log->setCharacterName($name);
-					if(!$repository->findBy(array('time' => $Log->getTime(), 'characterName' => $Log->getCharacterName()))) {
-						var_dump('persisting this one.');
-						$this->em->persist($Log);
+				foreach($logs as $log) {
+					// var_dump($log);
+					if($Log = $this->getLogFromScratch($log)) {
+						// var_dump($Log);
+					
+						if(!$repository->findBy(array('time' => $Log->getTime(), 'characterName' => $Log->getCharacterName()))) {
+							$this->em->persist($Log);
+						}
 					}
-					//
-					var_dump($Log);
 				}
+
+				
 			}
 
-			$this->em->flush();
-			//echo "<pre>".str_replace('\r\n', "\r\n", json_encode($content, JSON_PRETTY_PRINT))."</pre>";
 		}
+		$this->em->flush();
 	}
 
 	/*

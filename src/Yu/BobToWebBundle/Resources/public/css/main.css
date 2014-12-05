@@ -1,4 +1,32 @@
-body {
+ul.left-menu {
 
-	margin: 5px;
+	min-height: 500px;
+	list-style: none;
+}
+ul.left-menu li {
+	display:block;
+
+}
+
+ul.left-menu a {
+	text-decoration: none;
+	color:#337ab7;
+	display:block;
+	padding: 10px 15px;
+	font-size: 20px;
+}
+
+ul.left-menu a:hover {
+	color: #012f83;
+}
+
+.logs-file-form {
+
+	margin: 20px 0 20px 0;
+	padding: 10px;
+	border-left:4px #2980b9 solid;
+	border-bottom: 4px #2980b9 solid;
+	border-radius: 0px 0px 0px 5px;
+
+
 }

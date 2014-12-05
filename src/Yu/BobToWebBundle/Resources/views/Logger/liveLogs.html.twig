@@ -1,12 +1,12 @@
 {% extends "YuBobToWebBundle::layout.html.twig" %}
 
-
-
 {% block title %}
-	Accueil - {{ parent() }}
+	Direct - {{ parent() }}
 {% endblock %}
 
 {% block body %}
+{{ parent() }}
+
 
 <script>
 
@@ -14,21 +14,22 @@
 
 </script>
 
-	<div class="logs">
-		<div class="log">
-			<div class="log-charname f3 ">
-				<p class="-nm">Futoae</p>
+	<div class="f8">
+		<div class="logs-header">
+			<div class="log-charname f3">
+				<p class="-nm">Personnage</p>
 			</div>
 
 			<div class="log-date f2">
-				<p class="-nm">14 Juillet 2014 06:54:21</p>
+				<p class="-nm">Date</p>
 			</div>
 
 			<div class="log-content f7">
-				<p class="-nm">Character got kicked</p>
+				<p class="-nm">Log</p>
 			</div>
-		</div>	
+		</div>
+		<div class="logs">
+		</div>
 	</div>
-	<h1>INDEX</h1>
 
 {% endblock %}

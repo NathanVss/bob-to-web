@@ -1,0 +1,17 @@
+{% extends "YuBobToWebBundle::layout.html.twig" %}
+
+{% block title %}
+	Gestion - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+{{ parent() }}
+
+
+{% for form in forms %}
+	<div class="logs-file-form">
+		{{ form(form.createView()) }}
+	</div>
+{% endfor %}
+
+{% endblock %}

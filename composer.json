@@ -36,7 +36,8 @@
         "twbs/bootstrap": "3.0.*",
         "jquery/jquery":  "1.10.*",
         "leafo/lessphp": "0.4.0",
-        "jms/serializer": "0.16.0"
+        "jms/serializer": "0.16.0",
+        "coresphere/console-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
