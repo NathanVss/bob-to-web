@@ -19,6 +19,9 @@ ul.left-menu a {
 ul.left-menu a:hover {
 	color: #012f83;
 }
+* {
+	font-family: "Ubuntu";
+}
 
 .logs-file-form {
 
@@ -29,4 +32,14 @@ ul.left-menu a:hover {
 	border-radius: 0px 0px 0px 5px;
 
 
+}
+
+label.logs-file-form-label {
+	float: left;
+	width: 150px;
+
+
+}
+input.logs-file-form-path-input {
+	width: 800px	;
 }

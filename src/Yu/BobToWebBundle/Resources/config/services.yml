@@ -5,3 +5,6 @@ services:
     yu_bob_to_web.logger:
         class: Yu\BobToWebBundle\Logger\YuLogger
         arguments: [@doctrine]
+    yu_bob_to_web.serversManager:
+        class: Yu\BobToWebBundle\Server\ServersManager
+        arguments: [@doctrine]

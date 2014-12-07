@@ -31,15 +31,20 @@
 
         <li>
           <a href="{{ path('yu_bob_to_web_homepage') }}">Logs en Direct</a>
+        </li>       
+
+        <li>
+          <a href="{{ path('yu_bob_to_web_manage_servers') }}">Serveurs</a>
         </li>
       </ul>
     </div>
 
     {% endblock %}
 
-  	{% javascripts '@YuBobToWebBundle/Resources/public/js/jquery-2.1.1.min.js' '@YuBobToWebBundle/Resources/public/js/ajax.js' %}
-  		<script type="text/javascript" src="{{ asset_url }}"></script>
-  	{% endjavascripts %}
+    {% block javascript %}
+      <script type="text/javascript" src="{{ asset('bundles/yubobtoweb/js/jquery-2.1.1.min.js') }}"></script>
+    {% endblock %}
+
   	</body>
 
 

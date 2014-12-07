@@ -31,17 +31,34 @@ class LogsFile
     /**
      * @var integer
      *
-     * @ORM\Column(name="lastSize", type="integer")
+     * @ORM\Column(name="lastSize", type="integer", nullable=true)
      */
     private $lastSize;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="lastCheckTime", type="integer")
+     * @ORM\Column(name="lastCheckTime", type="datetime", nullable=true)
      */
     private $lastCheckTime;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Yu\BobToWebBundle\Entity\Player", cascade={"persist"})
+     */
+    private $player;
+
+    public function __construct() {
+
+        $this->lastCheckTime = new \Datetime();
+    }
+
+    public function getPlayer(){
+        return $this->player;
+    }
+
+    public function setPlayer($player){
+        $this->player = $player;
+    }
 
     /**
      * Get id
@@ -107,7 +124,7 @@ class LogsFile
      */
     public function setLastCheckTime($lastCheckTime)
     {
-        $this->lastCheckTime = $lastCheckTime;
+        $this->lastCheckTime = clone $lastCheckTime;
 
         return $this;
     }
@@ -119,6 +136,6 @@ class LogsFile
      */
     public function getLastCheckTime()
     {
-        return $this->lastCheckTime;
+        return clone $this->lastCheckTime;
     }
 }

@@ -1,0 +1,13 @@
+{% extends "YuBobToWebBundle::layout.html.twig" %}
+
+{% block title %}
+	Gestion - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+{{ parent() }}
+
+{{ form(checkFilesForm) }}
+
+
+{% endblock %}

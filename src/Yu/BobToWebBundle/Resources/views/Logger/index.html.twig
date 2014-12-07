@@ -1,0 +1,34 @@
+{% extends "YuBobToWebBundle::layout.html.twig" %}
+
+
+
+{% block title %}
+	Accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+<script>
+
+	var ajaxUrlLastsLogs = "{{ ajaxUrlLastsLogs }}";
+
+</script>
+
+	<div class="logs">
+		<div class="log">
+			<div class="log-charname f3 ">
+				<p class="-nm">Futoae</p>
+			</div>
+
+			<div class="log-date f2">
+				<p class="-nm">14 Juillet 2014 06:54:21</p>
+			</div>
+
+			<div class="log-content f7">
+				<p class="-nm">Character got kicked</p>
+			</div>
+		</div>	
+	</div>
+	<h1>INDEX</h1>
+
+{% endblock %}

@@ -9,3 +9,6 @@ yu_bob_to_web_ajax_getlasts:
     defaults: { _controller: YuBobToWebBundle:Ajax:getLastLogs }
     requirements:
         amount: \d+
+yu_bob_to_web_manage_servers:
+    path:     /bobtoweb/manage-servers
+    defaults: { _controller: YuBobToWebBundle:Default:manageServers }

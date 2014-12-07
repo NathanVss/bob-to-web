@@ -10,7 +10,26 @@
 
 {% for form in forms %}
 	<div class="logs-file-form">
-		{{ form(form.createView()) }}
+		{# {{ form(form.createView()) }} #}
+
+		{{ form_start(form) }}
+
+		<div>
+		{{ form_label(form.path, "Chemin du fichier : ", {'label_attr': {'class': 'logs-file-form-label'}}) }}
+		{{ form_widget(form.path, {'attr': {'class': 'logs-file-form-path-input'}}) }}
+		</div>
+
+		<div>
+		{{ form_label(form.path, "Taille : ", {'label_attr': {'class': 'logs-file-form-label'}}) }}
+		{{ form_widget(form.lastSize) }}
+		</div>
+
+		<div>
+		{{ form_label(form.path, "Dernier Check : ", {'label_attr': {'class': 'logs-file-form-label'}}) }}
+		{{ form_widget(form.lastCheckTime) }}
+		</div>
+		{{ form_rest(form) }}
+		{{ form_end(form) }}
 	</div>
 {% endfor %}
 

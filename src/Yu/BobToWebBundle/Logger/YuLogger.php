@@ -7,15 +7,11 @@ use Yu\BobToWebBundle\Entity\LogsFile;
 
 class YuLogger {
 
-	private $filesToCheck;
 	private $em;
 	private $LogsFiles;
 	public function __construct($doctrine) {
 		$this->em = $doctrine->getManager();
 		$this->LogsFiles = $this->em->getRepository('YuBobToWebBundle:LogsFile')->findAll();
-		// var_dump($this->LogsFiles);
-
-		$this->filesToCheck = array('C:/Users/Nathan/Documents/M2Bob/M2Bob - Version/M2Bob - Version 3.9.8/Resources/Userdata/Logs/Jeltao.log');
 
 	}
 
@@ -26,7 +22,8 @@ class YuLogger {
 		if($curSize != $LogsFile->getLastSize()) {
 
 			$LogsFile->setLastSize($curSize);
-			$LogsFile->setLastCheckTime(time());
+			$LogsFile->setLastCheckTime(new \Datetime("now"));;
+			// var_dump($LogsFile->getLastCheckTime());
 			$this->em->persist($LogsFile);
 			$this->em->flush();
 			return true;

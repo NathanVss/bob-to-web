@@ -17,8 +17,9 @@ class LogsFileType extends AbstractType
         $builder
             ->add('path', 'text')
             ->add('lastSize', 'text')
-            ->add('lastCheckTime', 'text')
+            ->add('lastCheckTime', 'datetime', array('with_seconds' => true))
             ->add('Save', 'submit')
+            ->add('Update', 'submit')
         ;
     }
     

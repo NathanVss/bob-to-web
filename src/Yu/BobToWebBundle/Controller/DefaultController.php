@@ -12,10 +12,8 @@ class DefaultController extends Controller
 {
     public function indexAction() {
 
-        $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
-
     	$Logger = $this->container->get('yu_bob_to_web.logger');
-        // $Logger->updateLogs();
+
     	$url = $this->get('router')->generate(
     			'yu_bob_to_web_ajax_getlasts',
     			array('amount' => 20)
@@ -24,23 +22,52 @@ class DefaultController extends Controller
 		return $this->render('YuBobToWebBundle:Logger:liveLogs.html.twig', array('ajaxUrlLastsLogs' => $url));  
     }
 
+    public function manageServersAction(Request $request) {
+        $formBuilder = $this->get('form.factory')->createBuilder('form');
+        $formBuilder
+                ->add('checkFiles', 'submit');
+
+        $checkFilesForm = $formBuilder->getForm();
+
+        if($checkFilesForm->handleRequest($request)->isValid()) {
+
+            
+
+        }
+
+        return $this->render('YuBobToWebBundle:Servers:manageServers.html.twig', array(
+            'checkFilesForm' => $checkFilesForm->createView()));
+    }
+
     public function manageLogsFilesAction(Request $request) {
         $repository = $this->getDoctrine()->getManager()->getRepository('YuBobToWebBundle:LogsFile');
         $LogsFiles = $repository->findAll();
 
         $forms = array();
-        foreach($LogsFiles as $LogsFile) {
+        foreach($LogsFiles as $key => $LogsFile) {
 
-            $forms[] = $this->get('form.factory')->create(new LogsFileType, $LogsFile);
+            $forms[] = $this->get('form.factory')->createNamed($key, new LogsFileType, $LogsFile);
 
         }
+        foreach($forms as $key => $form) {
 
-        if ($forms[0]->handleRequest($request)->isValid()) {
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($advert);
-          $em->flush();            
+            if($form->handleRequest($request)->isValid()) {
+
+                if($form->get('Save')->isClicked()) {
+                    $CurLogsFile = $form->getData();
+                    $this->getDoctrine()->getManager()->persist($CurLogsFile);
+                    $this->getDoctrine()->getManager()->flush();                   
+                } elseif($form->get('Update')->isClicked()) {
+
+                }
+
+            }
         }
-        // var_dump($request);
+        foreach($forms as $key => $form) {
+
+            $forms[$key] = $form->createView();
+        }
+        
         return $this->render('YuBobToWebBundle:Logger:manageLogsFiles.html.twig', array('forms' => $forms));
     }
 }

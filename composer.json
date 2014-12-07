@@ -37,7 +37,8 @@
         "jquery/jquery":  "1.10.*",
         "leafo/lessphp": "0.4.0",
         "jms/serializer": "0.16.0",
-        "coresphere/console-bundle": "dev-master"
+        "coresphere/console-bundle": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "~2.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

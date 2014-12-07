@@ -33,3 +33,9 @@
 	</div>
 
 {% endblock %}
+
+
+{% block javascript %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/yubobtoweb/js/ajax.js') }}"></script>
+{% endblock %}
