@@ -7,7 +7,29 @@
 {% block body %}
 {{ parent() }}
 
-{{ form(checkFilesForm) }}
+<div class="logs-file-form">
+	{{ form(checkFilesForm) }}
+</div>
 
+{% for serverForm in serverForms %}
+
+<div class="logs-file-form">
+	{{ form_start(serverForm) }}
+
+	<div>
+		{{ form_label(serverForm.name, "Nom : ", {'label_attr': {'class': 'logs-file-form-label'}}) }}
+		{{ form_widget(serverForm.name) }}
+	</div>
+
+	<div>
+		{{ form_label(serverForm.channelsNb, "Channels : ", {'label_attr': {'class': 'logs-file-form-label'}}) }}
+		{{ form_widget(serverForm.channelsNb) }}
+	</div>
+
+	{{ form_rest(serverForm) }}
+	{{ form_end(serverForm) }}
+</div>
+
+{% endfor %}
 
 {% endblock %}

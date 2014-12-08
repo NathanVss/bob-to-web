@@ -9,9 +9,33 @@ class YuLogger {
 
 	private $em;
 	private $LogsFiles;
-	public function __construct($doctrine) {
-		$this->em = $doctrine->getManager();
+	private $Container;
+
+	public function __construct($Container) {
+
+		$this->Container = $Container;
+		$this->em = $this->Container->get('doctrine')->getManager();
 		$this->LogsFiles = $this->em->getRepository('YuBobToWebBundle:LogsFile')->findAll();
+
+	}
+
+	public function updateLogsFile($LogsFile) {
+;
+		if($LogsFile->getPlayer() == null) {
+			$content = file_get_contents($LogsFile->getPath());
+			$content = explode("\r\n", $content);
+
+			$PlayersManager = $this->Container->get('yu_bob_to_web.playersManager');
+			if(preg_match("#\[([a-zA-Z0-9]+):\s+([0-9\.]+),\s([0-9:]+)\]\s-->\s([a-zA-Z0-9:,\s]+)#", $content[0], $matches)) {
+
+				$Player = $PlayersManager->createIfNotExists($matches[1]);
+				if($Player) {
+					$LogsFile->setPlayer($Player);
+					$this->em->persist($LogsFile);
+					$this->em->flush();
+				}
+			}
+		}
 
 	}
 

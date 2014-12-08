@@ -28,6 +28,19 @@ class Server
      */
     private $name;
 
+    /**
+     * @ORM\Column(name="channels_nb", type="integer")
+     */
+    private $channelsNb;
+
+
+    public function getChannelsNb(){
+        return $this->channelsNb;
+    }
+
+    public function setChannelsNb($channelsNb){
+        $this->channelsNb = $channelsNb;
+    }
 
     /**
      * Get id
