@@ -4,6 +4,7 @@ namespace Yu\BobToWebBundle\Controller;
 
 use Yu\BobToWebBundle\Form\LogsFileType;
 use Yu\BobToWebBundle\Form\ServerType;
+use Yu\BobToWebBundle\Form\PlayerType;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,9 +25,37 @@ class DefaultController extends Controller
     }
 
     public function managePlayersAction(Request $request) {
+        $playerRepository = $this->getDoctrine()->getManager()->getRepository('YuBobToWebBundle:Player');
+        $em = $this->getDoctrine()->getManager();
+        $Players = $playerRepository->findAll();
+        $playerForms = array();
 
+        foreach($Players as $key => $Player) {
+
+            $playerForms[] = $this->get('form.factory')->createNamed($key, new PlayerType, $Player);
+
+        }
+        foreach($playerForms as $playerForm) {
+            if($playerForm->handleRequest($request)->isValid()) {
+                $Player = $playerForm->getData();
+                if($playerForm->get('Save')->isClicked()) {
+                    $em->persist($Player);
+                } elseif($playerForm->get('Delete')->isClicked()) {
+                    $em->remove($Player);
+                }
+                
+                
+                $em->flush();
+                return $this->redirect($request->getUri());
+            }
+
+        }
+        foreach($playerForms as $key => $playerForm) {
+            $playerForms[$key] = $playerForm->createView();
+        }
         
-        return $this->render('YuBobToWebBundle:Players:managePlayers.html.twig');
+        return $this->render('YuBobToWebBundle:Players:managePlayers.html.twig', array(
+            'playerForms' => $playerForms));
     }
 
     public function manageServersAction(Request $request) {

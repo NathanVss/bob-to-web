@@ -44,6 +44,7 @@ class LogsFile
 
     /**
      * @ORM\OneToOne(targetEntity="Yu\BobToWebBundle\Entity\Player", cascade={"persist"})
+     * @ORM\joinColumn(onDelete="SET NULL")
      */
     private $player;
 

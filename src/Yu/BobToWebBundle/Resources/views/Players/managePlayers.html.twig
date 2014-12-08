@@ -7,7 +7,28 @@
 {% block body %}
 {{ parent() }}
 
+{% for playerForm in playerForms %}
 
+<div class="logs-file-form">
+
+	{{ form_start(playerForm) }}
+
+	<div>
+	{{ form_label(playerForm.name, "Pseudo : ", {'label_attr': {'class': 'logs-file-form-label'}}) }}
+	{{ form_widget(playerForm.name) }}
+	</div>
+
+	<div>
+	{{ form_label(playerForm.server, "Serveur : ", {'label_attr': {'class': 'logs-file-form-label'}}) }}
+	{{ form_widget(playerForm.server) }}
+	</div>
+
+	{{ form_rest(playerForm) }}
+	{{ form_end(playerForm) }}
+
+</div>
+
+{% endfor %}
 
 
 {% endblock %}

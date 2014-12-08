@@ -42,6 +42,10 @@ class Server
         $this->channelsNb = $channelsNb;
     }
 
+    public function __toString() {
+        return $this->name;
+    }
+
     /**
      * Get id
      *
