@@ -22,6 +22,15 @@ var StatusManager =
 		html += '<p>' + status.name + '</p>';
 		html += '</div>';
 
+
+		html += '<div class="status-hp">';
+		html += '<p>' + status.hp + '% HP</p>';
+		html += '</div>';		
+
+		html += '<div class="status-exp">';
+		html += '<p>' + status.hp + '% EXP</p>';
+		html += '</div>';
+
 		if(status.isInGame == 'Yes') {
 			html += '<div class="status-is-in-game status-cool">';
 		} else {

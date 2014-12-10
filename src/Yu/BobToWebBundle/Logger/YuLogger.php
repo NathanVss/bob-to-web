@@ -80,6 +80,13 @@ class YuLogger {
 				
 				if(preg_match("#Status=(?<status>[a-zA-Z\s]+)#", $contents[$file]['content'], $matches)) {
 					$contents[$file]['status'] = $matches['status'];
+				}				
+				
+				if(preg_match("#HP=(?<hp>[0-9]+)#", $contents[$file]['content'], $matches)) {
+					$contents[$file]['hp'] = $matches['hp'];
+				}				
+				if(preg_match("#EXP=(?exp>[0-9]+)#", $contents[$file]['content'], $matches)) {
+					$contents[$file]['exp'] = $matches['exp'];
 				}
 
 			}

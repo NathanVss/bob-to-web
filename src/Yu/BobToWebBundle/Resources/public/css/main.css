@@ -59,6 +59,9 @@ input.logs-file-form-path-input {
 .status-is-in-game {
 	border-bottom: 2px #2980b9 solid;
 }
+.status-hp, .status-exp {
+	border-bottom: 2px #2980b9 solid;
+}
 
 .status-bad {
 	color : #c0392b;
