@@ -28,7 +28,7 @@ var StatusManager =
 		html += '</div>';		
 
 		html += '<div class="status-exp">';
-		html += '<p>' + status.hp + '% EXP</p>';
+		html += '<p>' + status.exp + '% EXP</p>';
 		html += '</div>';
 
 		if(status.isInGame == 'Yes') {
