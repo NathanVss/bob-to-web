@@ -9,9 +9,15 @@ yu_bob_to_web_ajax_getlasts:
     defaults: { _controller: YuBobToWebBundle:Ajax:getLastLogs }
     requirements:
         amount: \d+
+yu_bob_to_web_ajax_get_status:
+    path:     /bobtoweb/ajax/getstatus
+    defaults: { _controller: YuBobToWebBundle:Ajax:getStatus }
 yu_bob_to_web_manage_servers:
     path:     /bobtoweb/manage-servers
     defaults: { _controller: YuBobToWebBundle:Default:manageServers }
 yu_bob_to_web_manage_players:
    path:      /bobtoweb/manage-players
    defaults: { _controller: YuBobToWebBundle:Default:managePlayers }
+yu_bob_to_web_manage_status:
+   path:      /bobtoweb/manage-status
+   defaults: { _controller: YuBobToWebBundle:Default:manageStatus }

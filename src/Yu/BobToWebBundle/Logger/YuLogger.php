@@ -19,8 +19,76 @@ class YuLogger {
 
 	}
 
+	public function checkStatusFiles() {
+		$oldContents = $this->getStatusFiles();
+		// var_dump($oldContents);
+		sleep(2);
+		$curContents = $this->getStatusFiles();
+		$updatedContents = array();
+		foreach($oldContents as $key => $oldContent) {
+			if($oldContents[$key]['timestamp'] != $curContents[$key]['timestamp']) {
+
+				$updatedContents[$key] = $curContents[$key];
+
+				// if(isset($oldContents[$key]['name'])) {
+				// 	var_dump("### ".$oldContents[$key]['name']." ###");
+				// }
+				// var_dump("before :");
+				// var_dump($oldContents[$key]['date']);
+				// var_dump("now : ");
+				// var_dump($curContents[$key]['date']);
+				// var_dump("");
+				// var_dump("");
+				// var_dump("");
+			}
+		}
+		return $updatedContents;
+		// var_dump($updatedContents);
+
+	}
+
+	public function getStatusFiles() {
+		$path = "C:/Users/Nathan/Documents/M2Bob/M2Bob - Version/M2Bob - Version 3.9.8/Resources/Userdata/CharSettings";
+		$handle = opendir($path);
+		$files = array();
+
+		while($entry = readdir($handle)) {
+			if($entry != '.' && $entry != '..' && strstr($entry, '_status.bob')) {
+				$files[] = $entry;
+			}
+		}
+
+
+		$contents = array();
+		foreach($files as $file) {
+			$content = file_get_contents($path.'/'.$file);
+			$content = str_replace("\r\n", "_|_", $content);
+			
+			if(preg_match("#Logging=(?<timestamp>[0-9]+)#", $content, $matches)) {
+
+				$contents[$file] = array('content' => $content);
+				$contents[$file]['timestamp'] = $matches['timestamp'];
+				$contents[$file]['date'] = date("H:i:s d-m-Y", $matches['timestamp']);
+
+				if(preg_match("#Nick=(?<name>[a-zA-Z0-9]+)#", $contents[$file]['content'], $matches)) {
+					$contents[$file]['name'] = $matches['name'];
+				}
+
+				if(preg_match("#IsIngame=(?<isInGame>[a-zA-Z]+)#", $contents[$file]['content'], $matches)) {
+					$contents[$file]['isInGame'] = $matches['isInGame'];
+				}
+				
+				if(preg_match("#Status=(?<status>[a-zA-Z\s]+)#", $contents[$file]['content'], $matches)) {
+					$contents[$file]['status'] = $matches['status'];
+				}
+
+			}
+		}
+		return $contents;
+	}
+
 	public function updateLogsFile($LogsFile) {
-;
+
 		if($LogsFile->getPlayer() == null) {
 			$content = file_get_contents($LogsFile->getPath());
 			$content = explode("\r\n", $content);

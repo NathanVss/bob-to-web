@@ -16,6 +16,18 @@ class AjaxController extends Controller
 
     }
 
+    public function getStatusAction() {
+
+
+        $Logger = $this->container->get('yu_bob_to_web.logger');
+        $status = $Logger->checkStatusFiles();
+
+        $response = new JsonResponse();
+
+        $response->setContent(json_encode($status));
+        return $response;
+    }
+
 
     public function getLastLogsAction($amount) {
 

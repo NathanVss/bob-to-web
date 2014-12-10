@@ -1,0 +1,44 @@
+{% extends "YuBobToWebBundle::layout.html.twig" %}
+
+{% block title %}
+	Gestion - {{ parent() }}
+{% endblock %}
+
+
+{% block body %}
+
+<script>
+
+	var ajaxUrlStatus = "{{ ajaxUrlStatus }}";
+
+</script>
+
+
+{{ parent() }}
+
+<div class="status-container">
+	<div class="status f2">
+		<div class="status-name">
+			<p>MasterBlastr</p>
+		</div>
+
+		<div class="status-is-in-game status-cool">
+			<p>Is In Game : Yes</p>
+		</div>
+
+		<div class="status-status">
+			<p>Leveling</p>
+		</div>
+
+	</div>
+</div>
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/yubobtoweb/js/status.js') }}"></script>
+{% endblock %}

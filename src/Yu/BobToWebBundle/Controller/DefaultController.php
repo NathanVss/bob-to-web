@@ -24,6 +24,19 @@ class DefaultController extends Controller
 		return $this->render('YuBobToWebBundle:Logger:liveLogs.html.twig', array('ajaxUrlLastsLogs' => $url));  
     }
 
+    public function manageStatusAction(Request $request) {
+
+        $Logger = $this->container->get('yu_bob_to_web.logger');        
+        // $Logger->checkStatusFiles();
+
+        $url = $this->get('router')->generate(
+                'yu_bob_to_web_ajax_get_status'
+            );
+        $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$url;
+
+        return $this->render('YuBobToWebBundle:Status:manageStatus.html.twig', array('ajaxUrlStatus' => $url));
+    }
+
     public function managePlayersAction(Request $request) {
         $playerRepository = $this->getDoctrine()->getManager()->getRepository('YuBobToWebBundle:Player');
         $em = $this->getDoctrine()->getManager();

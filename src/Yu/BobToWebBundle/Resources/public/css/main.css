@@ -44,3 +44,27 @@ label.logs-file-form-label {
 input.logs-file-form-path-input {
 	width: 800px	;
 }
+
+
+.status {
+	padding: 10px;
+	margin: 0 0 0 15px;
+	border-left: 2px #2980b9 solid;
+	border-bottom: 2px #2980b9 solid;
+	
+}
+.status-name {
+	border-bottom: 2px #2980b9 solid;
+}
+.status-is-in-game {
+	border-bottom: 2px #2980b9 solid;
+}
+
+.status-bad {
+	color : #c0392b;
+}
+
+.status-cool {
+	color: #27ae60;
+
+}
