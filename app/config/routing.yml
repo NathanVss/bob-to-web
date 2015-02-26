@@ -1,3 +1,7 @@
+yu_auth:
+    resource: "@YuAuthBundle/Resources/config/routing.yml"
+    prefix:   /
+
 yu_bob_to_web:
     resource: "@YuBobToWebBundle/Resources/config/routing.yml"
     prefix:   /

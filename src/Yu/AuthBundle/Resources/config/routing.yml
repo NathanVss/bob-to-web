@@ -1,0 +1,12 @@
+yu_auth_homepage:
+    path:     /yuauth
+    defaults: { _controller: YuAuthBundle:Default:index }
+login:
+    pattern: /login
+    defaults: { _controller: YuAuthBundle:Security:login }
+
+login_check:
+    pattern: /login_check
+
+logout:
+    pattern: /logout
