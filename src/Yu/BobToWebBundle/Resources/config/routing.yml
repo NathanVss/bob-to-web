@@ -21,3 +21,9 @@ yu_bob_to_web_manage_players:
 yu_bob_to_web_manage_status:
    path:      /bobtoweb/manage-status
    defaults: { _controller: YuBobToWebBundle:Default:manageStatus }
+yu_bob_to_web_acdc:
+   path:      /acdc
+   defaults: { _controller: YuBobToWebBundle:Default:acdc }
+yu_bob_to_web_ajax_acdc:
+   path:      /ajax/acdc
+   defaults: { _controller: YuBobToWebBundle:Ajax:acdc }

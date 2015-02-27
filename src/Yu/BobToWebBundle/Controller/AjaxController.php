@@ -16,6 +16,27 @@ class AjaxController extends Controller
 
     }
 
+    public function acdcAction() {
+
+        $url = "http://www.stadefrance.com/";
+        $firstContent = file_get_contents($url);
+
+        sleep(2);
+        $secondContent = file_get_contents($url);
+
+
+        $response = new JsonResponse();
+        if($secondContent != $firstContent)  {
+            $response->setContent(json_encode(array('changed' => true)));
+        } else {
+            $response->setContent(json_encode(array('changed' => false)));
+        }
+
+
+        
+        return $response;
+    }
+
     public function getStatusAction() {
 
 

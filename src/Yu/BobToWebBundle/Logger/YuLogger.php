@@ -48,7 +48,7 @@ class YuLogger {
 	}
 
 	public function getStatusFiles() {
-		$path = "C:/Users/Nathan/Documents/M2Bob/M2Bob - Version/M2Bob - Version 3.9.8/Resources/Userdata/CharSettings";
+		$path = "C:\Users\Nathan\Documents\M2Bob\M2Bob - Version 3.9.11\Resources\Userdata\CharSettings";
 		$handle = opendir($path);
 		$files = array();
 

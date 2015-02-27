@@ -1,0 +1,95 @@
+{% extends "YuBobToWebBundle::layout.html.twig" %}
+
+{% block title %}
+	Gestion - {{ parent() }}
+{% endblock %}
+
+
+{% block body %}
+
+{% block javascript %}
+	{{ parent() }}
+	
+
+{% endblock %}
+<script>
+
+	var ajaxUrl = "{{ ajaxUrl }}";
+
+</script>
+
+
+{{ parent() }}
+
+{# <object type="audio/mpeg" width="0" height="0" data="{{ asset('bundles/yubobtoweb/sounds/alarms.wav') }}"> 
+	<param name="filename" value="{{ asset('bundles/yubobtoweb/sounds/alarms.wav') }}" /> 
+	<param name="autostart" value="true" /> 
+	<param name="loop" value="false" /> 
+</object> #}
+
+<audio class="alarm" src="{{ asset('bundles/yubobtoweb/sounds/alarms.mp3') }}" >
+  Votre navigateur ne supporte pas l'élément <code>audio</code>.
+</audio>
+
+<div class="CLOSED">
+	<p>Fermé</p>
+</div>
+<div class="OPEN">
+	<p>OUVEEERRTTTTT</p>
+</div>
+
+
+<script>
+	$(function() {
+
+		var open = $('.OPEN');
+		var closed = $('.CLOSED');
+		var alarm = $('.alarm');
+		open.hide();
+		closed.show();
+
+		console.log(alarm);
+
+		var done = false;
+		// document.location.href="http://google.fr/";
+
+
+		function ajax() {
+
+		    $.ajax({
+		       url : ajaxUrl,
+		       type : 'GET',
+		       dataType : 'json',
+		       success : function(json, statut){ // success est toujours en place, bien sûr !
+					console.log(json);
+					if(json.changed) {
+						open.show();
+						closed.hide();
+						alarm[0].autoplay = true;
+						if(!done) {
+							window.open("http://www.stadefrance.com/");
+							done = true;
+						}
+						// window.open("http://www.stadefrance.com/");
+					}
+		           
+		       },
+
+		       error : function(resultat, statut, erreur){
+
+		       }
+
+		    });
+
+		}
+		ajax();
+		setInterval(ajax, 2000);
+
+	});
+
+</script>
+
+{% endblock %}
+
+
+

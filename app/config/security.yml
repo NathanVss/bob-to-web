@@ -30,11 +30,13 @@ security:
             anonymous: true
             provider: in_memory
             form_login:
+                always_use_default_target_path: true
+                default_target_path: yu_auth_homepage
                 login_path: login
                 check_path: login_check
             logout:
                 path: logout
-                target: /quelquechos
+                target: /yuauth
 
 
     # with these settings you can restrict or allow access for different parts

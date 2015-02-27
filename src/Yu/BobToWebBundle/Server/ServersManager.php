@@ -16,7 +16,7 @@ class ServersManager {
 		
 		$this->Container = $Container;
 		$this->em = $this->Container->get('doctrine')->getManager();
-		$this->serverFilePath = "C:/Users/Nathan/Documents/M2Bob/M2Bob - Version/M2Bob - Version 3.9.8/Resources/Userdata/Serverlist.ini";
+		$this->serverFilePath = "C:\Users\Nathan\Documents\M2Bob\M2Bob - Version 3.9.11\Resources\Userdata\Serverlist.ini";
 		
 	}
 
